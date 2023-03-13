@@ -22,12 +22,6 @@ const getResults = async (query) => {
         .then(getFeatureDetails)
         .then((response) => console.log(response))
         .catch((err) => console.log(err));
-
-        // const basicPlaceData = await getCoordinates(query);
-        // console.log(basicPlaceData);
-        // const features = await getBbox(basicPlaceData);
-        // const featureDetails = await getFeatureDetails(features);
-        // console.log(featureDetails);
     }
 }
 

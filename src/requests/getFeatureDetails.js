@@ -1,12 +1,11 @@
 import axios from "axios";
-import * as Promise from 'bluebird';
 import tools from './tools.json';
 
 const getFeatureDetails = async (features) => {
     let featureDetails = [];
     features = removeFeaturesWithoutName(features);
-    features = features.splice(2);
-    featureDetails = queryAllFeatures(features, featureDetails);
+    //features = features.splice(0, 2);
+    featureDetails = await queryAllFeatures(features);
     return featureDetails;
 };
 
@@ -14,10 +13,12 @@ const removeFeaturesWithoutName = (features) => {
     return features.filter((feature) => feature.name);
 }
 
-const queryAllFeatures = (features, featureDetails) => {
-    Promise.map(features, (feature) => {
-        return setTimeout(queryFeature, 1000, feature)
-    }).then(() => console.log('Queried all features.'));
+const queryAllFeatures = (features) => {
+    return features.map(async (feature) => {
+        setInterval(console.log(`Querying ${feature.name}`), 1000);
+        let featureDetail = await queryFeature(feature);
+        return queryFeature(featureDetail);
+    });
 };
 
 const queryFeature = (feature) => {
@@ -25,6 +26,9 @@ const queryFeature = (feature) => {
     return axios
     .get(url)
     .then((response) => response.data)
+    .then(setTimeout(() => {
+        console.log(`Query of ${feature.name} successful.`);
+    }, 1000))
     .catch((err) => err);
 };
 

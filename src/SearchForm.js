@@ -8,7 +8,7 @@ const SearchForm = ({ setSearchResults }) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const results = await getResults(searchValue);
-        console.log(results);
+        // console.log(results);
         // setSearchResults(results);
     }
     return (

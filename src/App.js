@@ -4,6 +4,7 @@ import { Routes, Route, Link } from 'react-router-dom';
 import SearchPage from './SearchPage';
 import PasswordHasher from './PasswordHasher';
 import SignupForm from './SignupForm';
+import SigninForm from './SigninForm';
 
 const App = () => {
   return (
@@ -14,11 +15,13 @@ const App = () => {
         <li className="navbar-list-item"><Link to="search">Search</Link></li>
         <li className="navbar-list-item"><Link to="password-hasher">Password Hasher</Link></li>
         <li className="navbar-list-item"><Link to="sign-up">Sign Up</Link></li>
+        <li className="navbar-list-item"><Link to="sign-in">Sign In</Link></li>
       </ul>
       <Routes>
         <Route path="search" element={SearchPage()} />
         <Route path="password-hasher" element={PasswordHasher()} />
         <Route path="sign-up" element={SignupForm()} />
+        <Route path="sign-in" element={SigninForm()} />
       </Routes>
     </div>
   );

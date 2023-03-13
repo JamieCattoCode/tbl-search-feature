@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { validateUser } from "./mockDatabase";
 
 const SigninForm = () => {
     const initialState = {
@@ -10,8 +11,9 @@ const SigninForm = () => {
     const [password, setPassword] = useState(initialState.password);
 
     const handleSignin = (event) => {
-        // Check if user is in the database model
-        // Check if the hashed passwords match
+        event.preventDefault();
+        const response = validateUser({username: username, password: password});
+        console.log(response.message);
     }
 
     const handleUsernameChange = (event) => {
@@ -34,8 +36,10 @@ const SigninForm = () => {
                     <div>
                         <input type="text" id="password" name="password" value={password} onChange={handlePasswordChange}/>
                     </div>
-                    <button type="submit">Sign Up</button>
+                    <button type="submit">Sign In</button>
                 </form>
             </div>
     )
 }
+
+export default SigninForm;
